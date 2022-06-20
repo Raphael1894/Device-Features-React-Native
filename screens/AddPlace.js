@@ -1,7 +1,7 @@
-import { Text } from "react-native";
+import PlaceForm from "../components/PlaceForm";
 
 function AddPlace() {
-  return <Text>AddPlace</Text>;
+  return <PlaceForm/>;
 }
 
 export default AddPlace;
