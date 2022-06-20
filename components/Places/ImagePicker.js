@@ -1,12 +1,13 @@
-import { Alert, Button, Image, StyleSheet, Text, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, View } from "react-native";
 import {
   launchCameraAsync,
   useCameraPermissions,
   PermissionStatus,
-} from 'expo-image-picker';
-import { useState } from 'react';
+} from "expo-image-picker";
+import { useState } from "react";
 
-import { Colors } from '../../constants/colors';
+import { Colors } from "../../constants/colors";
+import OutlinedButton from "../ui/OutlinedButton";
 
 function ImagePicker() {
   const [pickedImage, setPickedImage] = useState();
@@ -23,8 +24,8 @@ function ImagePicker() {
 
     if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
       Alert.alert(
-        'Insufficient Permissions!',
-        'You need to grant camera permissions to use this app.'
+        "Insufficient Permissions!",
+        "You need to grant camera permissions to use this app."
       );
       return false;
     }
@@ -57,7 +58,9 @@ function ImagePicker() {
   return (
     <View>
       <View style={styles.imagePreview}>{imagePreview}</View>
-      <Button title="Take Image" onPress={takeImageHandler} />
+      <OutlinedButton icon="camera" onPress={takeImageHandler}>
+        Take Image
+      </OutlinedButton>
     </View>
   );
 }
@@ -66,16 +69,16 @@ export default ImagePicker;
 
 const styles = StyleSheet.create({
   imagePreview: {
-    width: '100%',
+    width: "100%",
     height: 200,
     marginVertical: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: Colors.primary100,
     borderRadius: 4,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
 });
