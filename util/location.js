@@ -1,4 +1,4 @@
-const GOOGLE_API_KEY = "";
+import { GOOGLE_API_KEY } from "@env";
 const mapZoomLevel = "14";
 const mapSize = "400x200";
 const mapType = "roadmap";
