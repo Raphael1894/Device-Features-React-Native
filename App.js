@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Fragment, useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SplashScreen from "expo-splash-screen";
@@ -7,38 +7,32 @@ import * as SplashScreen from "expo-splash-screen";
 import AllPlaces from "./screens/AllPlaces";
 import AddPlace from "./screens/AddPlace";
 import Map from "./screens/Map";
+import PlaceDetails from "./screens/PlaceDetails";
 import IconButton from "./components/ui/IconButton";
 import { Colors } from "./constants/colors";
 import { init } from "./util/database";
-import { View } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-
   useEffect(() => {
     async function prepare() {
       try {
         await SplashScreen.preventAutoHideAsync();
-
         await init();
       } catch (e) {
         console.warn(e);
       } finally {
         setAppIsReady(true);
-        console.log("appIsReady");
       }
     }
-    console.log("prepare");
     prepare();
   }, []);
 
   useEffect(() => {
     async function hideSplash() {
       if (appIsReady) {
-        console.log("await");
-
         await SplashScreen.hideAsync();
       }
     }
@@ -81,6 +75,11 @@ export default function App() {
             component={AddPlace}
           />
           <Stack.Screen name="Map" component={Map} />
+          <Stack.Screen
+            name="PlaceDetails"
+            component={PlaceDetails}
+            options={{ title: "Loading Place..." }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
